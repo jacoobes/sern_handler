@@ -1,6 +1,6 @@
 const {
     message
-} = require(`../discord-bot/index`)
+} = require(`../../discord-bot/index`)
 /**
  *
  * @param {String} arguments - Can take in an array or string. Returns Collection or Object of Collections
