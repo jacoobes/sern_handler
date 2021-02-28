@@ -1,7 +1,5 @@
-
-
 const chalk = require('chalk')
-
+const glob = require('glob')
 
 // const commandHandler = (() => {
 
@@ -9,7 +7,7 @@ const chalk = require('chalk')
 //     const glob = require('glob')
 //     let commandCollection = new Map()
 //     let aliasCollection = new Map()
-    
+
 //     const {
 //         Client
 //     } = require('discord.js')
@@ -75,13 +73,13 @@ const chalk = require('chalk')
 //          * @param {string}  wantsLog.customMessage - Option to output custom message
 //          */
 
-       
+
 
 //         /**
 //          * Executes all commands
 //          */
 //         commandExecuter: function () {
-            
+
 //             let {
 //                 message,
 //                 argument
@@ -223,92 +221,139 @@ class CommandIpsum {
 
     }
 
-   defaultRun() {
-        let {client, prefix} = this.payload.getPayload()
+    defaultRun() {
 
-        const {Argument} = require('./Argument/argumentHandler')
+        let {
+            client,
+            prefix
+        } = this.payload.getPayload()
 
-        const {allCommands: {aliasCollection, commandCollection}} = require('./payload')
+        const {
+            Argument
+        } = require('../Argument/argumentHandler')
+
+        const {
+            allCommands: {
+                aliasCollection,
+                commandCollection
+            }
+        } = require('../data_events/payload')
 
 
-        
-        client.on('message',  message => {
 
+        client.on('message', message => {
+
+            module.exports.message = message
+
+           
             if(message.author.bot) return;
-            if(!message.content.toLowerCase().startsWith(prefix)) return;      
-            
-            let messageEmitted = message.content.split(/\s+/g)
-            
-            if(!aliasCollection.has(messageEmitted[1]) || !commandCollection.has(messageEmitted[1])) {return message.reply('Command not found.')}
+            if(!message.content.toLowerCase().startsWith(prefix)) return;
 
-            
-            
-            let command = aliasCollection.get(messageEmitted[1]) || commandCollection.get(messageEmitted[1])
-            let {usesArguments: {argType, array, validate}} = command
+            let messageEmitted = message.content.split(/\s+/g)
+
+            let command = aliasCollection.get(messageEmitted[1]) || commandCollection.get(messageEmitted[1]) || null
+
+            if (command == null) return message.reply('Command not found.')
+
+            let {
+                usesArguments
+            } = command
+
+            let {
+                usesArguments: {
+                    argType,
+                    array,
+                    validate
+                }
+            } = command
+
+
             let argument = new Argument(messageEmitted, array, argType, validate)
 
-            command.callback(client, message, argument)
+            if (usesArguments) {
+
+                argument.setArray()
+                argument.setType()
+                argument.ensureValidationFunction()
+                argument.send()
+
+                return command.callback(client, message, argument)
+
+            } else {
+
+                return command.callback(client, message)
+
+            }
+
+
 
         })
 
     }
-    
 
 
 
+    displayOptions(wantsLog = {
+        consoleCommands: false,
+        consoleRAM: false,
+        customMessage: false
+    }) {
 
+        let {
+            allCommands: {
+                commandCollection
+            }
+        } = require('../data_events/payload')
 
- displayOptions(wantsLog = {
-    consoleCommands: false,
-    consoleRAM: false,
-    customMessage: false
-}) {
+        let {
+            consoleCommands,
+            consoleRAM,
+            customMessage
+        } = wantsLog
 
-let {allCommands: {commandCollection}} = require('./payload')
-
-let {consoleCommands, consoleRAM, customMessage} = wantsLog
-
-    if (consoleCommands) {
-        let commandTable = {}
-        for (let [key, value] of commandCollection) {
-            value.description == undefined ?
-                (value.description = ``) :
-                (commandTable[key] = value.description)
-        }
-        console.log(chalk.bold.redBright('Registering:'))
-        console.table(commandTable)
-    }
-
-    if (consoleRAM) {
-        const used = process.memoryUsage()
-        let memoryToMegaBytes = []
-        let keys = []
-
-        for (let key in used) {
-            memoryToMegaBytes.push(Math.round((used[key] / 1024 / 1024) * 100) / 100)
-            keys.push(key)
+        if (consoleCommands) {
+            let commandTable = {}
+            for (let [key, value] of commandCollection) {
+                value.description == undefined ?
+                    (value.description = ``) :
+                    (commandTable[key] = value.description)
+            }
+            console.log(chalk.bold.redBright('Registering:'))
+            console.table(commandTable)
         }
 
-        let tableOfMemory = keys.reduce((accumulator, currentValue, index) => {
-            accumulator[currentValue] = memoryToMegaBytes[index] + 'MBs'
+        if (consoleRAM) {
+            const used = process.memoryUsage()
+            let memoryToMegaBytes = []
+            let keys = []
 
-            return accumulator
-        }, {})
+            for (let key in used) {
+                memoryToMegaBytes.push(Math.round((used[key] / 1024 / 1024) * 100) / 100)
+                keys.push(key)
+            }
 
-        console.table(tableOfMemory)
+            let tableOfMemory = keys.reduce((accumulator, currentValue, index) => {
+                accumulator[currentValue] = memoryToMegaBytes[index] + 'MBs'
+
+                return accumulator
+            }, {})
+
+            console.table(tableOfMemory)
+        }
+
+        if (customMessage) {
+            console.log(wantsLog.customMessage)
+        }
+
+
+
+
     }
-
-    if (customMessage) {
-        console.log(wantsLog.customMessage)
-    }
-
-
-
-    
-} 
 
 
 }
 
 
-module.exports = {CommandIpsum}
+module.exports = {
+    CommandIpsum
+}

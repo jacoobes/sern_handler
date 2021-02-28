@@ -1,5 +1,7 @@
 module.exports = {
 
-    Payload: require('./payload'),
-    CommandIpsum: require('./executor.js')
+    Payload: require('./data_events/payload'),
+    CommandIpsum: require('./mainExecutor/executor.js'),
+    CustomEventHandler: require('./data_events/event'),
+    Argument: require('./Argument/argumentHandler')
 }

@@ -1,11 +1,9 @@
-const {
-    message
-} = require(`../../discord-bot/index`)
+
 /**
- *
+ * @param {Message} message - Your message parameter
  * @param {String} arguments - Can take in an array or string. Returns Collection or Object of Collections
  */
-function getMentions(arguments) {
+function getMentions(message, arguments) {
 
     const objectContainingMentions = {}
     let anyIDs = turnMentionIntoID(arguments)

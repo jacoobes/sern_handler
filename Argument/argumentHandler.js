@@ -1,6 +1,10 @@
 const {
     getMentions
-} = require('./utils')
+} = require('./mentions')
+const {
+    randomInt
+} = require('./randomInt')
+const {getOwnerInfo} = require('./clientInfo')
 
 class Argument {
 
@@ -12,7 +16,9 @@ class Argument {
         this.argType = argType
         this.validate = validate
         this.utils = {
-            getMentions: getMentions
+            getMentions: getMentions,
+            randomInt: randomInt,
+            getOwnerInfo: getOwnerInfo
         }
 
 
@@ -65,12 +71,18 @@ class Argument {
         return passesTest
     }
 
+    send() {
 
+        module.exports.argumentInstance = this.argument
+
+    }
 
 
 
 
 }
+
+
 module.exports.Argument = Argument
 
 
