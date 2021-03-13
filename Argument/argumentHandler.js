@@ -1,12 +1,7 @@
 const {
     getMentions
 } = require('./mentions')
-const
-    randomInt = require('./randomInt').getRandomInt
-
-
-
-
+const randomInt = require('./randomInt').getRandomInt
 
 class Argument {
 
@@ -18,36 +13,33 @@ class Argument {
         this.argType = argType
         this.validate = validate
         this.utils = {
-            getMentions: getMentions,
-            randomInt: randomInt,
-            
+            check: require('./valid/validate').validate,
         }
-
-
     }
 
     setArray() {
 
 
         if (this.array) {
-            return this.argument = Array.prototype.slice.call(this.argument, 2)
+            return this.argument = Array.prototype.slice.call(this.argument, 1)
         } else {
 
-            return this.argument = Array.prototype.slice.call(this.argument, 2).join(' ')
+            return this.argument = Array.prototype.slice.call(this.argument, 1).join(' ')
         }
 
 
     }
-
-    type() {
-
-        let desiredType = this.array ? this.argType.split(" ") : [this.argType]
-        /**
+    /**
          * All type checks: 
-         * String, Integer, Number, Character,  flex 
+         * string, integer, number, character, flex 
          * 
          * 
          */
+        
+    type() {
+   
+        let desiredType = this.array ? this.argType.split(" ") : [this.argType]
+    
 
         let argLine = "";
         let index = 0;
@@ -86,7 +78,7 @@ class Argument {
 
                 index++;
             }
-            return argLine.trimEnd()
+            return argLine.trim();
 
 
         }
@@ -108,7 +100,18 @@ class Argument {
 
     }
 
+    static randomInt(min, max) {
 
+       return randomInt(min, max)
+
+
+    }
+
+    static getMentions(argument, message) {
+
+        return getMentions(argument, message)
+
+    }
 
 
 
