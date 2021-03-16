@@ -1,4 +1,4 @@
-# sern_handler  1.0.2
+# sern_handler 
  
 sern_handler is a flexible, setup-friendly, utility package for your discord bot. Easy-to-use features and lots of customization. </br >
 
