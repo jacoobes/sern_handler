@@ -73,4 +73,4 @@ class CustomEventHandler extends sern_handler {
 }
 
 
-module.exports.CustomEventHandler = CustomEventHandler
+module.exports = CustomEventHandler

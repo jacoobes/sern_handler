@@ -149,6 +149,5 @@ class sern_handler {
 
 }
 
-module.exports = {
-    sern_handler
-}
+module.exports = sern_handler
+ 

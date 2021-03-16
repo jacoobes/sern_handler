@@ -107,4 +107,4 @@ class Payload {
 
 
 
-module.exports.Payload = Payload
+module.exports = Payload

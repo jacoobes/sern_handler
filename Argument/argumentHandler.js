@@ -117,4 +117,4 @@ class Argument {
 
 
 
-module.exports.Argument = Argument
+module.exports = Argument
