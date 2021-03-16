@@ -3,8 +3,8 @@
 sern_handler is a flexible, setup-friendly, utility package for your discord bot. Easy-to-use features and lots of customization. </br >
 
 [**Documentation**](#Quick-Docs-📜)  
-[**Upcoming Updates**](#Upcoming-Changes-/-Updates)
-[**Source**]()
+[**Upcoming Updates**](#Upcoming-Changes-/-Updates) </br >
+[**Source**](https://github.com/jacoobes/sern_handler)
 ## Installation ▶️
 
 ```bash
