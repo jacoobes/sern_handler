@@ -183,8 +183,8 @@ module.exports = {
 **argType** : For each argument wanted in the command, type check each. </br>
 </br>
 
-❗️ **NOTE**: If you want arguments attached, the `array` and `argType` header are required. </br>
-❗️ **NOTE**: if `array` is false, `argType` must be one string only. </br>
+❗️**NOTE**: If you want arguments attached, the `array` and `argType` header are required. </br>
+❗️**NOTE**: if `array` is false, `argType` must be one string only. </br>
 <b><u>Supported Types :</u></b>
   <ul> 
   <li> <b>Flex</b>
