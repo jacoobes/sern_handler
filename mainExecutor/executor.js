@@ -42,8 +42,8 @@ class sern_handler {
 
                     let {
                         usesArguments: {
-                            argType,
-                            array,
+                            argType = 'string',
+                            array = false,
                             validate,
                             typeError,
                             validateError = "Arguments did not pass the test",

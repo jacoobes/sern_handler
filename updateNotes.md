@@ -29,3 +29,7 @@ fixed some minor README errors
 -new method `fetchEmittedCommand`
     -@returns Object of `payload.data.commands`, mapped by the command emitted.
 -fixed bug that made whole handler not work. oops!
+
+# 1.0.5
+
+-fixed argType was required bug
