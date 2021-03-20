@@ -90,8 +90,22 @@ module.exports = {
  ## **class sern_handler extends CustomEventHandler**
 
   ### `constructor : (payload : Payload)` ### 
+  **properties** :
+   - **commandsAndAliases**
+      - glorified `payload.commands()` method but in a property.
+
   **methods** :
-   [all super() methods](##**class-sern_handler**) 
+  - [all super() methods](##class-sern_handler) 
+   <ul> 
+ <li> <b>isValidMessage (message : Message) </b> @returns <b> boolean </b> 
+    <ul> 
+    <li> checks if message.content starts with `payload.data.prefix`
+    <li> checks if author of message was a bot
+    </ul>
+ <li> <b>fetchEmittedCommand</b> @ returns <b> Object of `payload.data.commands()`, mapped by the command emitted.
+    
+</ul>
+
 - - - -
 ## **class Payload**
 
@@ -99,7 +113,7 @@ module.exports = {
   **methods** :
 
 <ul> 
- <li> <b>setCommands</b> @returns <b>Object &ltPromise&ltMap&gt&gt </b> 
+ <li> <b>commands</b> @returns <b>Object &ltPromise&ltMap&gt&gt </b> 
     <ul> 
     <li> aliasCollection : aliases for commands mapped to a file</li>
     <li> commandCollection : command names mapped to a file</li>

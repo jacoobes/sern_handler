@@ -1,6 +1,6 @@
-const {
+const 
     sern_handler
-} = require("../mainExecutor/executor");
+ = require("../mainExecutor/executor");
 
 let {
     join
@@ -19,7 +19,6 @@ class CustomEventHandler extends sern_handler {
     constructor(payload, overrideAllListeners) {
 
         super(payload)
-        
 
         if (payload.data.events == null) {
             console.log(payload)
@@ -64,16 +63,37 @@ class CustomEventHandler extends sern_handler {
 
             })();
 
+            
 
         }
+
+
         
     } 
-  
-
+   
     
+    isNotValidMessage(message) {
+      
+        return message.author.bot || !message.content.toLowerCase().startsWith(this.payload.data.prefix);
+    }
 
+   get commandsAndAliases() {
 
+        let commandsAndAliases = this.payload.commands()
+        
+        return new Promise(resolve => {
+            resolve(commandsAndAliases)
+        })
+    }
+  async fetchEmittedCommand(message) {
+    let formattedMessage =  message.content.slice(this.payload.data.prefix.length).trim().split(/\s+/g)
+    
+   let {commandCollection, aliasCollection } = await this.commandsAndAliases 
 
+    let command = commandCollection.get(formattedMessage[0]) || aliasCollection.get(formattedMessage[0]) || null
+    return command
+        
+   }
 
 }
 

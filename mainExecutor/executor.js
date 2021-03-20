@@ -16,7 +16,7 @@ class sern_handler {
                 let {
                     commandCollection,
                     aliasCollection
-                } = await payload.setCommands()
+                } = await payload.commands()
 
                 const {
                     Argument
@@ -38,7 +38,7 @@ class sern_handler {
 
                     if (command == null) return message.reply('Command not found.')
 
-
+                    
 
                     let {
                         usesArguments: {
@@ -103,7 +103,7 @@ class sern_handler {
 
         let {
             commandCollection
-        } = await this.payload.setCommands()
+        } = await this.payload.commands()
 
         let {
             consoleCommands,
