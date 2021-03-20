@@ -18,9 +18,9 @@ class sern_handler {
                     aliasCollection
                 } = await payload.commands()
 
-                const {
+                const 
                     Argument
-                } = require('../Argument/argumentHandler')
+                 = require('../Argument/argumentHandler')
 
                 let {
                     prefix,

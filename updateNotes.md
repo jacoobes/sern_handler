@@ -38,3 +38,6 @@ fixed some minor README errors
 
 -fixed other bugs
 -undefined errors fixed
+# 1.0.9
+
+-required Argument class bug
