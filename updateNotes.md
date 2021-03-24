@@ -43,7 +43,7 @@ fixed some minor README errors
 
 - required Argument class bug
 
-# 1.1.0 
+# 1.10.0 
 
 - fixed some README errors again lol
     - some hyperlinks were broken, updates and quick docs were fixed
@@ -53,3 +53,7 @@ fixed some minor README errors
 - `argument.type()` is now a property instead of method.
 - a few more methods added to customEventHandler! check README
 - this update may be unstable. If you encounter bugs, please report. Check README.
+
+# 1.10.1
+
+- Added some changes to readme, forgot to add in original update. ^

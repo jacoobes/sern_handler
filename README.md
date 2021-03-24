@@ -102,7 +102,10 @@ module.exports = {
     }
 
 }
+
+
 ```
+**Using the sern_handler custom event class, You can easily customize your commands to your liking. Above is a template you can copy. If you need help understanding the code, join the [discord](https://discord.gg/KRDNjsmbqv)!**
 
 # Quick Docs 📜
 
