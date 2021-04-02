@@ -57,3 +57,16 @@ fixed some minor README errors
 # 1.10.1
 
 - Added some changes to readme, forgot to add in original update. ^
+
+# 1.10.3
+
+-added a static Argument.paginate method to paginate embeds
+    - credit to [cheems](https://github.com/canta-slaus)
+- added joinedAt function to validate closure which checks when a member joined.
+- added hasRole function to validate closure which checks if member has roles
+
+# 1.10.4
+
+-fixed a bug where if you had a string and another argType, you would get an error
+-added to docs 
+    - make sure to optional chain your validate function

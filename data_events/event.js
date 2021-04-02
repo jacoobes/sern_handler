@@ -67,7 +67,6 @@ class CustomEventHandler extends sern_handler {
         }
 
     } 
-
     
     isNotValidMessage(message) {
       

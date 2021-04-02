@@ -64,7 +64,7 @@ class sern_handler {
 
                         let argument = new Argument(messageEmitted, array, argType, validate)
                         argument.setArray()
-
+                        
                         if (!argument.ensureValidationFunction()) {
                             return message.reply(validateError)
                         }
@@ -73,7 +73,7 @@ class sern_handler {
                             if (argument.argument === '') {
                                 return message.reply(noArgumentsError)
                             }
-                            typeError = typeError || `Incorrect type. Require(s) \`${argType}\`. Received \`${argument.type()}\``
+                            typeError = typeError || `Incorrect type. Require(s) \`${argType}\`. Received \`${argument.type}\``
                             return message.reply(typeError)
                         }
 

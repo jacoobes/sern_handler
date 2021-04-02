@@ -2,7 +2,7 @@ const {
     getMentions
 } = require('./mentions')
 const randomInt = require('./randomInt').getRandomInt
-
+const {paginate} = require('./paginatorCheems')
 class Argument {
 
 
@@ -36,13 +36,13 @@ class Argument {
         if (this.argType === undefined) return
         let desiredType = this.array ? this.argType.split(" ") : [this.argType]
 
-
         let argLine = "";
+        
         let index = 0;
-
         for (let header of desiredType) {
             let argument;
-
+            
+        
             if (Array.isArray(this.argument)) {
 
                 argument = +this.argument[index] || this.argument[index]
@@ -51,7 +51,7 @@ class Argument {
 
                 argument = +this.argument || this.argument
             }
-
+            
             if (header === 'flex') {
 
                 argLine += 'flex '
@@ -72,18 +72,18 @@ class Argument {
 
                 }
 
-                index++;
+                
             }
-            return argLine.trim();
+            index++;
+            
 
 
         }
-
+        return argLine.trim();
     }
 
     ensureValidationFunction() {
         if (this.validate == null) return true;
-
 
         let passesTest = this.validate(this.argument)
 
@@ -101,6 +101,11 @@ class Argument {
 
         return getMentions(argument, message)
 
+    }
+
+    static paginate (message, embed, options) {
+
+        return paginate(message, embed, options)
     }
 
 

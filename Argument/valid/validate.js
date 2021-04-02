@@ -69,8 +69,26 @@ module.exports.validate = function validate(message) {
 
             return true;
         },
+        /**
+         * 
+         * @param {Date} date 
+         */
+        function joinedAt() {
+            return message.member.joinedAt
 
-        
+        },
+          /**
+         * 
+         * @param {String[]} id - All ids to be checked in an Array
+         * @param {Boolean} all - Strictly check if member has all roles or just some
+         */
+        function hasRole(id = []) {
+            
+            let roleCheck = message.member.roles.cache.some(r=>id.includes(r.id))
+            
+           return roleCheck
+          
+        }
         
 
     ]

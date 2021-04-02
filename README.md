@@ -26,7 +26,8 @@ client: client                   //instance of Discord.Client
 const handler = new sern_handler(payload) //default Message event enabled
 
 ```
-❗️ **NOTE**: If you want **custom events** enabled, add to your Payload the `events` header:
+❗️ **NOTE**: If you want **custom events** enabled, add to your Payload the `events` header </br>
+❗️ **NOTE**: **custom events** are only allowed for the CustomEventHandler! 
 ```js
 //{commands : '/yourCommandsFolder',
 events: '/yourEventsFolder',
@@ -35,7 +36,7 @@ events: '/yourEventsFolder',
 
 And require the CustomEventHandler instead: <br />
 ❗️ **NOTE**: Using the custom event handler will disable all default events! <br />
-( **v1.0** > More features for custom event handlers will come eventually ) 
+ 
 ```js
 /**
 * Create custom events
@@ -55,11 +56,14 @@ Name of file is the name of listener. For example, this file name is "message.js
 ```js
 
 //this is a "message" event
+// callback for when event is emitted has params being the payload + respective event parameters
 const {handler} = require("your main file")
 module.exports = {
 
-    listener: 'on',                     // the type of listener
-    callback: (payload, message) => {   // callback for when event is emitted
+    listener: 'on',   // the type of listener
+    callback: (payload, message) => {   
+
+
 
         if(handler.isNotValidMessage(message)) return; //check Class Argument for more info!
 
@@ -105,7 +109,7 @@ module.exports = {
 
 
 ```
-**Using the sern_handler custom event class, You can easily customize your commands to your liking. Above is a template you can copy. If you need help understanding the code, join the [discord](https://discord.gg/KRDNjsmbqv)!**
+**Using the sern_handler custom event class, You can easily customize your commands to your liking. Above is a messag event template you can copy. If you need help understanding the code, join the [discord](https://discord.gg/KRDNjsmbqv)!**
 
 # Quick Docs 📜
 
@@ -180,6 +184,7 @@ module.exports = {
   <ul>
     <li> finds all roles / members mentioned in a give message.
   </ul>
+  <li> <b> STATIC paginate (message : Message, embeds : any[], options: {time : number} ) 
 </ul>
 
 - - - -
@@ -207,7 +212,7 @@ module.exports = {
      array: true,                                     
      argType: 'flex flex',                            
      validate: (args) => {                            
-       return args[0] === 'Baloney'
+       return args?.[0] === 'Baloney' //good practice to optional chain your validate function!
      },
      validateError: "Not valid, bro",                 
      noArgumentsError: "No arguments were attached",
@@ -219,7 +224,7 @@ module.exports = {
 
   callback: async (payload, message, {argument, utils: {check}}) => { 
   
-     console.log(argument.argument)
+     console.log(argument)
   },
 };
 
@@ -284,7 +289,10 @@ argument.utils.check(message) ->
 @returns Array : [
 
 function isNSFW () -> @returns boolean, checks if channel is NSFW,
-function memberHave(permissions: PermissionsResolvable as string) -> @returns boolean, checks if person sending message has these permissions. , 
+function memberHave(permissions: PermissionsResolvable as string) -> @returns boolean, checks if person sending message has these permissions. ,
+function joinedAt() -> @returns Date, checks when member joined your discord server
+function hasRole(id: String ) -> @returns boolean, checks if member has roles
+  parameter id = String to check role ids 
 ]
 ```
 ### **Upcoming Changes / Updates** ###
@@ -293,16 +301,11 @@ This list goes in descending order of priority.
 
 - [✅] More support for CustomEventHandler
   - check 1.0.9 - 1.1.0
-  - ~~[❌] Make Argument Class more flexible for custom events~~ discontinued
-    - will provide docs on how to use arguments accordingly
-- [❌] Typescript support
+- [❌] Default events for sern_handler coming soon
 - [❌] Refactoring code
-- [❌] More argument utils functions
+- [✅] More argument utils functions
 - [❌] More argument customization
-- [❌] (Possible) Making command loading more efficient ?
 - [❌] Cleaner docs.
-- [❌] Cleaner argument handling.
-- [❌] ~~Per server options~~ (Not pursuing)
 
 ## Bugs 🐛/ Suggestions ❓
 Report [here](https://discord.gg/KRDNjsmbqv)
