@@ -105,7 +105,10 @@ async displayOptions(wantsLog  = {consoleCommands : false, consoleRAM: false, cu
     })
     if(wantsLog.consoleEvents) {
         let allEventsinDirectory = await fs.readdir(join(require.main.path, this.payload.data.events), 'utf8')
-        
+        if(allEventsinDirectory == undefined) {
+            console.log("No events found!")
+            return;
+        }
         for (let eventName of allEventsinDirectory) {
             eventName = eventName.replace('.js', "")
             console.log(`Loading ... ${eventName} event` )
