@@ -76,3 +76,6 @@ fixed some minor README errors
     - consoleEvents to display detected events of the CustomEventHandler
 - I need to specify that custom Events are currently not supported by default sern_handler. You can add your own events, but sern_handler will not take care of it. This will change in the future, but if you plan to use other eventss such as GuildMemberAdd or others, sern_handler does not detect these. Read docs for more information.
 - Remember if you are experiencing bugs, please report them to me to get them fixed ASAP!
+
+# 1.10.7 
+-fixed a bug where if you had a number in your arguments, its type would be string.
